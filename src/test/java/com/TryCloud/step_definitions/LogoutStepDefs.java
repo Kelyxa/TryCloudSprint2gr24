@@ -4,17 +4,15 @@ import com.TryCloud.pages.BasePage;
 import com.TryCloud.pages.LoginPage;
 import com.TryCloud.pages.LogoutPage;
 import com.TryCloud.utilities.BrowserUtils;
-import com.TryCloud.utilities.Driver;
-import io.cucumber.java.en.And;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
 import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+
+
+
 
 public class LogoutStepDefs extends BasePage {
 
@@ -45,7 +43,7 @@ public class LogoutStepDefs extends BasePage {
 
 
     }
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+
     @When("User clicks on the step back arrow button")
     public void user_clicks_on_the_step_back_arrow_button() {
        try {
@@ -53,8 +51,7 @@ public class LogoutStepDefs extends BasePage {
        }catch (ElementNotInteractableException e){
            e.printStackTrace();
        }
-       // wait.until(ExpectedConditions.titleIs("Dashboard - Trycloud"));
-       // Assert.assertEquals("Title verification failed!","Trycloud",Driver.getDriver().getTitle());
+
 
 
     }
