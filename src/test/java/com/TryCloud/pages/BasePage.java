@@ -19,6 +19,21 @@ import java.util.List;
 
 public abstract class BasePage {
 
+    public BasePage() {
+        PageFactory.initElements(Driver.getDriver(), this);
+    }
+
+
+    @FindBy(xpath = "//input[@id='user']")
+    public WebElement userName;
+
+    @FindBy(xpath = "//input[@id='password']")
+    public WebElement passWord;
+
+    @FindBy(xpath = "//input[@id='submit-form']")
+    public WebElement loginButton;
+
+
 
     @FindBy(xpath = "(//a[@aria-label='Dashboard'])[1]")
     public WebElement dashboard;
@@ -60,72 +75,12 @@ public abstract class BasePage {
     public WebElement userIcon;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @FindBy(css = "span.title-level-1")
-    public List<WebElement> menuOptions;
-
-    @FindBy(css = "div[class='loader-mask shown']")
-    @CacheLookup
-    protected WebElement loaderMask;
-
-    @FindBy(css = "h1[class='oro-subtitle']")
-    public WebElement pageSubTitle;
-
-    @FindBy(css = "#user-menu > a")
-    public WebElement userName;
-
-    @FindBy(linkText = "Logout")
-    public WebElement logOutLink;
-
-    @FindBy(linkText = "My User")
-    public WebElement myUser;
-
-    public BasePage() {
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
-
-
-    /**
-     * @return page name, for example: Dashboard
-     */
-    public String getPageSubTitle() {
-        //ant time we are verifying page name, or page subtitle, loader mask appears
-        waitUntilLoaderScreenDisappear();
-//        BrowserUtils.waitForStaleElement(pageSubTitle);
-        return pageSubTitle.getText();
-    }
-
-
-    /**
-     * Waits until loader screen present. If loader screen will not pop up at all,
-     * NoSuchElementException will be handled  bu try/catch block
-     * Thus, we can continue in any case.
-     */
-    public void waitUntilLoaderScreenDisappear() {
-        try {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.invisibilityOf(loaderMask));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void login(String userNameStr, String passwordStr) {
+        userName.sendKeys(userNameStr);
+        passWord.sendKeys(passwordStr);
+        loginButton.click();
 
     }
-
 
 
     /**

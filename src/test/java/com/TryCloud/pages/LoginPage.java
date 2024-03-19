@@ -1,17 +1,16 @@
 package com.TryCloud.pages;
 
 
+import com.TryCloud.utilities.ConfigurationReader;
 import com.TryCloud.utilities.Driver;
 import com.TryCloud.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
-    public LoginPage(){
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
+
 
     @FindBy(xpath = "//input[@id='user']")
     public WebElement userName;
@@ -22,14 +21,32 @@ public class LoginPage {
     @FindBy(xpath = "//input[@id='submit-form']")
     public WebElement loginButton;
 
+    @FindBy(xpath = "//p[@class='warning wrongPasswordMsg']")
+    public WebElement wrongUsernamePassword;
+
+    @FindBy(id="message")
+    public WebElement errorMessage;
+
+    @FindBy(css = "a[class='toggle-password'] img")
+    public WebElement iconeEye;
+
+    @FindBy(id = "lost-password")
+    public WebElement linkLostPassword;
+
+    @FindBy(css = "input[id='reset-password-submit']")
+    public WebElement inputResetPasswordSubmit;
 
 
 
-    public void login(String userNameStr, String passwordStr) {
-        userName.sendKeys(userNameStr);
-        passWord.sendKeys(passwordStr);
-        loginButton.click();
-        // verification that we logged
+    public void login() {
+        LoginPage loginPage=new LoginPage();
+        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        loginPage.userName.sendKeys(ConfigurationReader.getProperty("username"));
+        loginPage.passWord.sendKeys(ConfigurationReader.getProperty("password"));
+        loginPage.loginButton.click();
+
     }
+
+
 
 }
