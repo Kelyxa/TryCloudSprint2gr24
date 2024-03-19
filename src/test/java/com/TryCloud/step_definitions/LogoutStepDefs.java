@@ -14,7 +14,7 @@ import org.openqa.selenium.ElementNotInteractableException;
 
 
 
-public class LogoutStepDefs extends BasePage {
+public class LogoutStepDefs {
 
 
     LogoutPage logoutPage = new LogoutPage();
