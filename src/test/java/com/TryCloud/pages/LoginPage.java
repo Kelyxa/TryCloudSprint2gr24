@@ -22,12 +22,31 @@ public class LoginPage {
     @FindBy(xpath = "//input[@id='submit-form']")
     public WebElement loginButton;
 
+    @FindBy(id = "lost-password")
+    public WebElement linkForgotPassword;
+
+    @FindBy(xpath = "//*[@id='reset-password-submit']")
+    public WebElement inputResetPasswordSubmit;
+
+    @FindBy(xpath = "/p[@class='warning wrongPasswordMsg']")
+    public WebElement WrongUsernamePassword;
+
+    @FindBy(css = "a[class='toggle-password'] img")
+    public WebElement iconeEyeOption;
+
+    @FindBy(xpath = "//p[contains(@class, 'warning')]")
+    public WebElement pWrongUsernamePassword;
+
+     @FindBy(xpath = "//p[@class='warning throttledMsg']")
+     public WebElement ThrottledMsg;
 
 
 
-    public void login(String userNameStr, String passwordStr) {
-        userName.sendKeys(userNameStr);
-        passWord.sendKeys(passwordStr);
+
+
+    public void loginPage(String username, String password) {
+        userName.sendKeys(username);
+        passWord.sendKeys(password);
         loginButton.click();
         // verification that we logged
     }
