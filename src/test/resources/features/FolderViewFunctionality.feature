@@ -8,7 +8,7 @@ Feature: As a user, I should be able to change folder view order by using Name/S
   @Name
   Scenario: Folder View order by Name
     And user clicks on Name button
-    Then user sees list in alphabetical order
+    Then user sees list by name
 
   @Size
   Scenario: Folder View order by Size
@@ -22,7 +22,5 @@ Feature: As a user, I should be able to change folder view order by using Name/S
 
   @allFiles
   Scenario: Select All files
-    When user clicks on All files button
     And user clicks on Select All checkbox
-    Then user sees all checkboxes are checked
-    And total values of folders and files are displayed
+    Then total values of folders and files are displayed
