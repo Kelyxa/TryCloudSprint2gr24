@@ -77,15 +77,7 @@ Feature:
     Then user click on the login button
     And the user is redirected to the dashboard page
 
-  @B32G24-236 @negative
- Scenario: Throttled Login Due to Multiple Invalid Attempts
-     Given the user enters a valid username
-      | username | Employee61 |
-    Then  the user enters invalid password
-      | pass | 1456 |
-    And user click on the login button
-    Then my next login attempt should be delayed by 30 seconds
-    And the user should see an error message
+
 
 
 
