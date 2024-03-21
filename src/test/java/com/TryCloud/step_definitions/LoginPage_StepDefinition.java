@@ -23,7 +23,7 @@ public class LoginPage_StepDefinition {
     @Given("Users Log to the application Trycloud")
     public void Users_Log_to_the_application_Trycloud() {
 
-       Driver.getDriver().get(ConfigurationReader.getProperty("trycloud_url"));
+        Driver.getDriver().get(ConfigurationReader.getProperty("trycloud_url"));
 
     }
 
@@ -45,7 +45,6 @@ public class LoginPage_StepDefinition {
 
         String actualURL = Driver.getDriver().getCurrentUrl();
         Assert.assertTrue(actualURL.contains("dashboard"));
-
 
 
     }
@@ -88,9 +87,9 @@ public class LoginPage_StepDefinition {
     }
 
     @Then("the user should see the  {string} ,message for the username field")
-    public void theUserShouldSeeTheMessageForTheUsernameField(String expectedErrorMessage ) {
+    public void theUserShouldSeeTheMessageForTheUsernameField(String expectedErrorMessage) {
         String actualErrorMessage = loginPage.passWord.getText();
-        Assert.assertTrue( expectedErrorMessage.contains(actualErrorMessage));
+        Assert.assertTrue(expectedErrorMessage.contains(actualErrorMessage));
     }
 
     @Given("the user enters a valid username")
@@ -152,7 +151,7 @@ public class LoginPage_StepDefinition {
     }
 
     @Then("the user should see a valid placeholder on the {string} field")
-    public void theUserShouldSeeAValidPlaceholderOnTheField(String expectedInputPass ) {
+    public void theUserShouldSeeAValidPlaceholderOnTheField(String expectedInputPass) {
         String actualInputPass = loginPage.passWord.getAttribute("placeholder");
         Assert.assertTrue(actualInputPass.contains(expectedInputPass));
     }
@@ -160,21 +159,21 @@ public class LoginPage_StepDefinition {
     @Given("the user enters a username with any case {string}")
     public void theUserEntersAUsernameWithAnyCaseEMPLOYEE(String expectedUserName) {
         loginPage.userName.sendKeys(expectedUserName);
+
     }
 
     @Then("the user enters invalid password")
     public void theUserEntersInvalidPassword(Map<String, String> invalidPassword) {
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
+
             loginPage.passWord.sendKeys(invalidPassword.get("pass"));
-            loginPage.passWord.clear();
             loginPage.loginButton.click();
+            loginPage.passWord.clear();
         }
 
 
-
     }
-
 
 
     @And("my next login attempt should be delayed by 30 seconds")
@@ -182,10 +181,9 @@ public class LoginPage_StepDefinition {
 
         try {
             Thread.sleep(30000);
-        }catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
 
     }
