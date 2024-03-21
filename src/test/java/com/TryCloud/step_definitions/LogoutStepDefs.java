@@ -22,9 +22,8 @@ public class LogoutStepDefs {
 
     @Given("User is on the home page")
     public void user_is_on_the_home_page() {
-        loginPage.userName.sendKeys("employee57");
-        loginPage.passWord.sendKeys("Employee123");
-        loginPage.loginButton.click();
+
+        loginPage.login();
 
 
     }
@@ -65,3 +64,4 @@ public class LogoutStepDefs {
 
 
 }
+
