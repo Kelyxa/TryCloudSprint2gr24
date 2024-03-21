@@ -19,68 +19,62 @@ import java.util.List;
 
 public abstract class BasePage {
 
-    public BasePage() {
+    public BasePage(){
         PageFactory.initElements(Driver.getDriver(), this);
     }
+      // if i put constructor here it is giving compile error...shohruh
 
 
-    @FindBy(xpath = "//input[@id='user']")
+
+
+    @FindBy(css = "span.title-level-1")
+    public List<WebElement> menuOptions;
+
+    @FindBy(css = "div[class='loader-mask shown']")
+    @CacheLookup
+    protected WebElement loaderMask;
+
+    @FindBy(css = "h1[class='oro-subtitle']")
+    public WebElement pageSubTitle;
+
+    @FindBy(css = "#user-menu > a")
     public WebElement userName;
 
-    @FindBy(xpath = "//input[@id='password']")
-    public WebElement passWord;
+    @FindBy(linkText = "Logout")
+    public WebElement logOutLink;
 
-    @FindBy(xpath = "//input[@id='submit-form']")
-    public WebElement loginButton;
-
-
-
-    @FindBy(xpath = "(//a[@aria-label='Dashboard'])[1]")
-    public WebElement dashboard;
-
-    @FindBy(xpath = "//a[@aria-label='Files']")
-    public WebElement files;
-
-    @FindBy(xpath = "//a[@aria-label='Photos']")
-    public WebElement photos;
-
-    @FindBy(xpath = "(//a[@aria-label='Activity'])[1]")
-    public WebElement activity;
-
-    @FindBy(xpath = "//a[@aria-label='Talk']")
-    public WebElement talk;
-
-    @FindBy(xpath = "(//a[@aria-label='Contacts'])[1]")
-    public WebElement contacts;
-
-    @FindBy()
-    public WebElement circles;
-
-    @FindBy()
-    public WebElement calendar;
-
-    @FindBy()
-    public WebElement deck;
-
-    @FindBy()
-    public WebElement searchButton;
-
-    @FindBy()
-    public WebElement bellButton;
-
-    @FindBy()
-    public WebElement searchContacts;
-
-    @FindBy()
-    public WebElement userIcon;
+    @FindBy(linkText = "My User")
+    public WebElement myUser;
 
 
-    public void login(String userNameStr, String passwordStr) {
-        userName.sendKeys(userNameStr);
-        passWord.sendKeys(passwordStr);
-        loginButton.click();
+
+
+    /**
+     * @return page name, for example: Dashboard
+     */
+    public String getPageSubTitle() {
+        //ant time we are verifying page name, or page subtitle, loader mask appears
+        waitUntilLoaderScreenDisappear();
+//        BrowserUtils.waitForStaleElement(pageSubTitle);
+        return pageSubTitle.getText();
+    }
+
+
+    /**
+     * Waits until loader screen present. If loader screen will not pop up at all,
+     * NoSuchElementException will be handled  bu try/catch block
+     * Thus, we can continue in any case.
+     */
+    public void waitUntilLoaderScreenDisappear() {
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.invisibilityOf(loaderMask));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
+
 
 
     /**

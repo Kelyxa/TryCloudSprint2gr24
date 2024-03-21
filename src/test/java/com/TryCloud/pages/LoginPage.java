@@ -3,10 +3,8 @@ package com.TryCloud.pages;
 
 import com.TryCloud.utilities.ConfigurationReader;
 import com.TryCloud.utilities.Driver;
-import com.TryCloud.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends BasePage {
 
@@ -38,7 +36,7 @@ public class LoginPage extends BasePage {
 
 
 
-    public void login() {
+    public void login(String userName, String passWord) {
         LoginPage loginPage=new LoginPage();
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
         loginPage.userName.sendKeys(ConfigurationReader.getProperty("username"));
