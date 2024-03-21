@@ -113,7 +113,11 @@ public class LoginPage_StepDefinition {
 
     @Then("the password field should be masked with dots")
     public void thePasswordFieldShouldBeMaskedWithDots() {
-        loginPage.passWord.getAttribute("type");
+
+
+         Assert.assertTrue(loginPage.passWord.getAttribute("type").contains("password"));
+
+
     }
 
     @And("the user click on the icone eye option")
@@ -134,7 +138,10 @@ public class LoginPage_StepDefinition {
 
     @When("the user is redirected to the password reset page")
     public void theUserIsRedirectedToThePasswordResetPage() {
-        loginPage.inputResetPasswordSubmit.isDisplayed();
+        Assert.assertTrue(loginPage.inputResetPasswordSubmit.isDisplayed());
+
+
+
 
     }
 
@@ -166,10 +173,10 @@ public class LoginPage_StepDefinition {
     public void theUserEntersInvalidPassword(Map<String, String> invalidPassword) {
 
         for (int i = 0; i < 5; i++) {
-
             loginPage.passWord.sendKeys(invalidPassword.get("pass"));
             loginPage.loginButton.click();
             loginPage.passWord.clear();
+
         }
 
 
@@ -191,8 +198,8 @@ public class LoginPage_StepDefinition {
 
     @And("the user should see an error message")
     public void theUserShouldSeeAnErrorMessage() {
-        loginPage.ThrottledMsg.getText();
 
 
+       Assert.assertTrue(loginPage.ThrottledMsg.isDisplayed());
     }
 }
