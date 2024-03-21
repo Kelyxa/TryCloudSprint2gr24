@@ -43,5 +43,5 @@ public class TryCloudPage extends BasePage {
     @FindBy(xpath = "(//span[@class='info'])[3]")
     public WebElement totalNumFilesAndFolders;
 
-
 }
+
