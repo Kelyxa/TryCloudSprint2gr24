@@ -10,10 +10,19 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class FolderView_step_def {
 LoginPage loginPage=new LoginPage();
 FilesPage filesPage=new FilesPage();
+String firstExpectedElement;
+
+
 
     @Given("user is logged in")
     public void userIsLoggedIn() {
@@ -25,28 +34,37 @@ FilesPage filesPage=new FilesPage();
     @When("user clicks on the files icon at top left")
     public void user_clicks_on_the_files_icon_at_top_left() {
         loginPage.files.click();
+        BrowserUtils.sleep(1);
     }
 
     @When("user clicks on Name button")
     public void user_clicks_on_name_button() {
-        BrowserUtils.sleep(2);
+        List<String> unSortedList= filesPage.getAllFileNameText();
+        Collections.sort(unSortedList);
+        firstExpectedElement = unSortedList.get(0);
         filesPage.nameButton.click();
+        BrowserUtils.sleep(3);
     }
 
-    @Then("user sees list in alphabetical order")
-    public void user_sees_list_in_alphabetical_order() {
+    @Then("user sees list by name")
+    public void userSeesListByName() {
+        System.out.println(filesPage.getAllFileNameText());
+        List<String > sortedList=filesPage.getAllFileNameText();
+        System.out.println("sortedList.get(0) = " + sortedList.get(0));
+        System.out.println("firstExpectedElement = " + firstExpectedElement);
+        Assert.assertEquals(firstExpectedElement,sortedList.get(0));
 
     }
 
 
     @When("user clicks on the Size button")
     public void userClicksOnTheSizeButton() {
-        BrowserUtils.sleep(5);
         filesPage.sizeButton.click();
     }
 
     @Then("user sees list in order based on size")
     public void userSeesListInOrderBasedOnSize() {
+
     }
 
     @When("user clicks on the Modified button")
@@ -68,12 +86,14 @@ FilesPage filesPage=new FilesPage();
         filesPage.selectAllCheckbox.click();
     }
 
-    @Then("user sees all checkboxes are checked")
-    public void userSeesAllCheckboxesAreChecked() {
-    }
 
     @And("total values of folders and files are displayed")
     public void totalValuesOfFoldersAndFilesAreDisplayed() {
+        WebElement totalFilesAndFolders= filesPage.totalFilesAndFolders;
+        String actualTotalFilesAndFolders=totalFilesAndFolders.getText();
+
+      //  Assert.assertEquals(totalFilesAndFolders,actualTotalFilesAndFolders);
+
     }
 
 
