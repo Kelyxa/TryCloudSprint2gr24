@@ -24,7 +24,7 @@ public class LoginPage_StepDefinition {
     @Given("Users Log to the application Trycloud")
     public void Users_Log_to_the_application_Trycloud() {
 
-        Driver.getDriver().get(ConfigurationReader.getProperty("trycloud_url"));
+        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
 
     }
 

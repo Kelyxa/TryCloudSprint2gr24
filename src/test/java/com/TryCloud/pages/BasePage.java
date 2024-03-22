@@ -19,6 +19,9 @@ import java.util.List;
 
 public abstract class BasePage {
 
+   public BasePage() {
+       PageFactory.initElements(Driver.getDriver(), this);
+   }
 
     @FindBy(xpath = "(//a[@aria-label='Dashboard'])[1]")
     public WebElement dashboard;
@@ -89,9 +92,6 @@ public abstract class BasePage {
     @FindBy(linkText = "My User")
     public WebElement myUser;
 
-    public BasePage() {
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
 
 
     /**

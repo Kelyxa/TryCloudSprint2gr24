@@ -1,17 +1,18 @@
 package com.TryCloud.pages;
 
 
+import com.TryCloud.utilities.ConfigurationReader;
 import com.TryCloud.utilities.Driver;
 import com.TryCloud.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
-    public LoginPage(){
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
+
+
+
 
     @FindBy(xpath = "//input[@id='user']")
     public WebElement userName;
@@ -43,7 +44,6 @@ public class LoginPage {
 
 
 
-
     public void loginPage(String username, String password) {
         userName.sendKeys(username);
         passWord.sendKeys(password);
@@ -51,4 +51,12 @@ public class LoginPage {
         // verification that we logged
     }
 
+    public void login() {
+        LoginPage loginPage=new LoginPage();
+        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        loginPage.userName.sendKeys(ConfigurationReader.getProperty("username"));
+        loginPage.passWord.sendKeys(ConfigurationReader.getProperty("password"));
+        loginPage.loginButton.click();
+
+    }
 }
