@@ -24,9 +24,9 @@ public class Hooks {
     @Before (order = 1)
     public void setupMethod(){
 
-        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        //Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 
-        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+       // Driver.getDriver().get(ConfigurationReader.getProperty("url"));
     }
 
     //@Before (value = "@login", order = 2 )
@@ -55,14 +55,14 @@ public class Hooks {
     }
 
     //@BeforeStep
-    public void setupStep(){
-        System.out.println("-----> @BeforeSTEP : Running before each step!");
-    }
+ //   public void setupStep(){
+       // System.out.println("-----> @BeforeSTEP : Running before each step!");
+    // }
 
     //@AfterStep
-    public void teardownStep(){
-        System.out.println("-----> @AfterSTEP : Running after each step!");
-    }
+  //  public void teardownStep(){
+      //  System.out.println("-----> @AfterSTEP : Running after each step!");
+  //  }
 
 
 }
