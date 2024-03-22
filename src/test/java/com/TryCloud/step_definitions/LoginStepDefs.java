@@ -2,33 +2,43 @@ package com.TryCloud.step_definitions;
 
 import com.TryCloud.pages.LoginPage;
 import com.TryCloud.utilities.ConfigurationReader;
+import com.TryCloud.utilities.Driver;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import org.junit.Assert;
+
 public class LoginStepDefs {
 
 
-    @Given("the user is on the login page")
-    public void the_user_is_on_the_login_page() {
-        System.out.println("Login to app in Before method");
-    }
+    LoginPage loginPage = new LoginPage();
 
-    @Given("the user logged in as {string}")
-    public void the_user_logged_in_as(String userType) {
-        //based on input enter that user information
-        String username =null;
-        String password =null;
+    @Given("user navigate to the application")
+    public void user_navigate_to_the_application() {
 
+       Driver.getDriver().get("http://qa2.trycloud.net/index.php/login");
 
-
-        //send username and password and login
-        new LoginPage().login(username,password);
-    }
-
-    @Given("the user logged in with username as {string} and password as {string}")
-    public void the_user_logged_in_with_username_as_and_password_as(String username, String password) {
-      LoginPage loginPage=new LoginPage();
-      loginPage.login(username,password);
     }
 
 
+    @Then("user logged in with a valid credentials")
+    public void user_logged_in_with_a_valid_credentials() {
+        loginPage.userName.sendKeys(ConfigurationReader.getProperty("trycloud_username"));
+        loginPage.passWord.sendKeys(ConfigurationReader.getProperty("trycloud_password"));
+    }
+
+    @Then("user click on the login button")
+    public void user_click_on_the_login_button() {
+        loginPage.loginButton.click();
+    }
+
+    @Then("the user is redirected to the dashboard page")
+    public void the_user_is_redirected_to_the_dashboard_page() {
+
+
+        String actualTitle = Driver.getDriver().getTitle();
+        Assert.assertTrue(actualTitle.contains("Dashboard"));
+
+
+    }
 
 }
