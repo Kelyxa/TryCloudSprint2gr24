@@ -59,21 +59,40 @@ String firstExpectedElement;
 
     @When("user clicks on the Size button")
     public void userClicksOnTheSizeButton() {
+        List<String> unSortedList= filesPage.getAllFileSize();
+        Collections.sort(unSortedList);
+        firstExpectedElement = unSortedList.get(0);
         filesPage.sizeButton.click();
+        BrowserUtils.sleep(6);
     }
 
     @Then("user sees list in order based on size")
     public void userSeesListInOrderBasedOnSize() {
+        System.out.println(filesPage.getAllFileSize());
+        List<String> sortedList=filesPage.getAllFileSize();
+        System.out.println("sortedList.get(0) = " + sortedList.get(0));
+        System.out.println("firstExpectedElement = " + firstExpectedElement);
+        Assert.assertEquals(firstExpectedElement,sortedList.get(0));
 
     }
 
     @When("user clicks on the Modified button")
     public void userClicksOnTheModifiedButton() {
+        List<String> unSortedList= filesPage.getAllTimeStamps();
+        Collections.sort(unSortedList);
+        firstExpectedElement = unSortedList.get(0);
         filesPage.modifiedButton.click();
+        BrowserUtils.sleep(3);
     }
 
     @Then("user sees list in order of modified dates")
     public void userSeesListInOrderOfModifiedDates() {
+        System.out.println(filesPage.getAllTimeStamps());
+        List<String> sortedList=filesPage.getAllTimeStamps();
+        System.out.println("sortedList = " + sortedList.get(0));
+        Assert.assertEquals(firstExpectedElement,sortedList.get(0));
+
+
     }
 
     @When("user clicks on All files button")
