@@ -169,6 +169,39 @@ public class LoginPage_StepDefinition {
         loginPage.userName.sendKeys(expectedUserName);
 
     }
+    @Then("the user enters invalid password")
+    public void theUserEntersInvalidPassword(Map<String, String> invalidPassword) {
 
+        for (int i = 0; i < 5; i++) {
+            loginPage.passWord.sendKeys(invalidPassword.get("pass"));
+            loginPage.loginButton.click();
+            loginPage.passWord.clear();
+            // BrowserUtils.sleep(2000);
+
+        }
+
+
+    }
+
+
+    @And("my next login attempt should be delayed by 30 seconds")
+    public void myNextLoginAttemptShouldBeDelayedBySeconds() {
+
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    @And("the user should see an error message")
+    public void theUserShouldSeeAnErrorMessage() {
+
+
+        Assert.assertTrue(loginPage.ThrottledMsg.isDisplayed());
+    }
 
 }

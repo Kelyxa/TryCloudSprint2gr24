@@ -2,6 +2,7 @@ package com.TryCloud.pages;
 
 import com.TryCloud.utilities.Driver;
 import io.cucumber.java.zh_cn.假如;
+import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,6 +35,13 @@ public class FilesPage extends BasePage {
         @FindBy(xpath = "//span[@class='nametext']/span[1]")
         public List<WebElement> listOfFileNames;
 
+        @FindBy(xpath ="//td[@class='filesize'][1]")
+        public List<WebElement> listOfFileSizes;
+
+        @FindBy(xpath = "//span[@class='modified live-relative-timestamp']")
+        public List<WebElement> listOfTimeStamps;
+
+
         public List<String> getAllFileNameText() {
                 List<String> fileText=new ArrayList<>();
                 List<WebElement>element=Driver.getDriver().findElements(By.xpath("//span[@class='nametext']/span[1]"));
@@ -43,6 +51,30 @@ public class FilesPage extends BasePage {
                 }
                 return fileText;
         }
+
+        public List<String> getAllFileSize(){
+                List<String> fileSize=new ArrayList<>();
+                List<WebElement> element=Driver.getDriver().findElements(By.xpath("//td[@class='filesize'][1]"));
+
+                for (WebElement each : element) {
+                        fileSize.add(each.getText());
+                }
+                return fileSize;
+        }
+
+        public List<String> getAllTimeStamps(){
+                List<String> timeStamp=new ArrayList<>();
+                List<WebElement> element=Driver.getDriver().findElements(By.xpath("//span[@class='modified live-relative-timestamp']"));
+
+                for (WebElement each : element) {
+                        timeStamp.add(each.getText());
+
+                }
+                return timeStamp;
+
+        }
+
+
 
 
 
